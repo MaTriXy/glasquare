@@ -23,6 +23,10 @@ public interface CheckIns {
     void add(@Query("oauth_token") String token, @Query("venueId") String venueId, @Query("ll") String ll,
              Callback<CheckInResponse> callback);
 
+    @POST("/checkins/add")
+    void add(@Query("oauth_token") String token, @Query("venueId") String venueId, @Query("ll") String ll, @Query("broadcast") String socialNetwork,
+             Callback<CheckInResponse> callback);
+
     @POST("/checkins/{check_in_id}/addcomment")
     void addComment(@Query("oauth_token") String token, @Path("check_in_id") String checkInId, @Query("text") String text,
                     Callback<CheckInResponse> callback);

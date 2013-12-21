@@ -24,4 +24,7 @@
     <string name="adding_photo">Adding photo …</string>
     <string name="photo_added">Photo added</string>
     <string name="popular_tip">Popular tip: %s</string>
+    <string name="share_to_twitter">Share to Twitter</string>
+    <string name="sharing_to_twitter">Sharing to Twitter …</string>
+    <string name="shared_to_twitter">Shared to Twitter</string>
 </resources>

@@ -9,4 +9,8 @@
         android:id="@+id/menu_comment"
         android:icon="@drawable/ic_menu_comment"
         android:title="@string/add_comment" />
+    <item
+        android:id="@+id/menu_twitter"
+        android:icon="@drawable/ic_menu_twitter"
+        android:title="@string/share_to_twitter" />
 </menu>

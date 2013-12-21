@@ -108,6 +108,9 @@ public class CheckInActivity extends BaseActivity {
             case R.id.menu_comment:
                 IntentUtils.startSpeechRecognition(this);
                 return true;
+            case R.id.menu_twitter:
+                shareTo("twitter");
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -161,6 +164,31 @@ public class CheckInActivity extends BaseActivity {
             @Override
             public void failure(RetrofitError retrofitError) {
                 showError(R.string.error_please_try_again);
+            }
+        });
+    }
+
+    private void shareTo(final String socialNetwork) {
+        String venueId = getIntent().getStringExtra(EXTRA_VENUE_ID);
+        String ll = LocationUtils.getLatLon();
+        String token = Auth.getToken();
+        if (socialNetwork.equals("twitter")) {
+            showProgress(R.string.sharing_to_twitter);
+        }
+        Api.get().create(CheckIns.class).add(token, venueId, ll, socialNetwork, new Callback<CheckIns.CheckInResponse>() {
+            @Override
+            public void success(CheckIns.CheckInResponse checkInResponse, Response response) {
+                mCheckInId = checkInResponse.getCheckInId();
+                if (socialNetwork.equals("twitter")) {
+                    showSuccess(R.string.shared_to_twitter);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError retrofitError) {
+                if (!Auth.handle(CheckInActivity.this, retrofitError)) {
+                    showError(R.string.error_please_try_again);
+                }
             }
         });
     }
